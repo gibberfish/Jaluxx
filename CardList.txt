@@ -1,0 +1,95 @@
+New Rules (21 cards)
+
+    Draw 2
+    Draw 3
+    Draw 4
+    Draw 5
+    Play 2
+    Play 3
+    Play 4
+    Play All
+    Hand Limit 0
+    Hand Limit 1
+    Hand Limit 2
+    Keeper Limit 2
+    Keeper Limit 3
+    Keeper Limit 4
+    Double Agenda
+    Reverse Order
+    First Play Random
+    No-Hand Bonus
+    Poor Bonus
+    Rich Bonus
+    Inflation
+ 
+Goals (23 cards)
+
+    10 Cards in Hand
+    5 Keepers
+    All You Need is Love
+    Appliances
+    Baked Goods
+    Bed Time
+    Brain (no TV)
+    Chocolate Cookies
+    Chocolate Milk
+    Death by Chocolate
+    Dreamland
+    Hearts and Minds
+    Hippyism
+    Milk and Cookies
+    Night and Day
+    Peace (no War)
+    Rocket Science
+    Rocket to the Moon
+    Squishy Chocolate
+    Time is Money
+    Toast
+    War = Death
+    Winning the Lottery
+
+Keepers (18 cards)
+
+    Brain
+    Bread
+    Chocolate
+    Cookies
+    Death
+    Dreams
+    Love
+    Milk
+    Money
+    Moon
+    Peace
+    Rocket
+    Sleep
+    Sun
+    Television
+    Time
+    Toaster
+    War
+
+ 
+Actions (20 cards)
+
+    Jackpot
+    Discard and Draw
+    Draw 2 and use 'em
+    Draw, 3, Play 2 of them
+    Empty the Trash
+    Everybody Gets 1
+    Exchange Keepers
+    Let's Do That Again
+    Let's Simplify
+    No Limits
+    Rotate Hands
+    Rules Reset
+    Scramble Keepers
+    Steal a Keeper
+    Take Another Turn
+    Taxation
+    Trade Hands
+    Trash a Keeper
+    Trash a New Rule
+    Use What You Take
+
