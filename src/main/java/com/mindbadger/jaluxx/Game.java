@@ -58,7 +58,7 @@ public class Game {
 		return true;
 	}
 
-	protected List<Card> getDrawPile() {
+	public List<Card> getDrawPile() {
 		return drawPile;
 	}
 
