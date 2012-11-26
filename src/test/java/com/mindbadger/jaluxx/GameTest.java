@@ -25,8 +25,13 @@ public class GameTest {
 
 	private Player player1;
 	private Player player2;
-	@Mock Pack mockPack;
 	
+	private Pack pack = new Pack ();
+
+	private Card card1 = new Card ("card1", CardType.ACTION, "image1");
+	private Card card2 = new Card ("card2", CardType.KEEPER, "image2");
+	private Card card3 = new Card ("card3", CardType.RULE, "image3");
+
 	@Before
 	public void setup () {
 		MockitoAnnotations.initMocks(this);
@@ -39,28 +44,24 @@ public class GameTest {
 		player2.setName("Anne");
 		player2.setPassword("annesPass");
 		
-		gameBeingTested = new Game (player1, mockPack);
+		List<Card> cardsInPack = new ArrayList<Card> ();
+		cardsInPack.add(card1);
+		cardsInPack.add(card2);
+		cardsInPack.add(card3);
+		pack.setCardsInPack(cardsInPack);
+		
+		gameBeingTested = new Game (player1, pack);
 	}
 	
 	@Test
 	public void drawPileIsCreatedFromPackOnStartup() {
-		// Given
-		List<Card> cardsInPack = new ArrayList<Card> ();
-		Card card1 = new Card ("card1", CardType.ACTION, "image1");
-		Card card2 = new Card ("card2", CardType.KEEPER, "image2");
-		Card card3 = new Card ("card3", CardType.RULE, "image3");
-		cardsInPack.add(card1);
-		cardsInPack.add(card2);
-		cardsInPack.add(card3);
-		
-		when (mockPack.getCardsInPack()).thenReturn(cardsInPack);
+		// Given		
 		
 		// When
-		gameBeingTested = new Game (player1, mockPack);
 
 		// Then
 		List<Card> drawPile = gameBeingTested.getDrawPile ();
-		if (drawPile == cardsInPack) fail ("The draw pile should contain the same objects, but not be the same");
+		if (drawPile == pack.getCardsInPack()) fail ("The draw pile should contain the same objects, but not be the same");
 		
 		assertEquals (3, drawPile.size());
 		assertEquals (card1, drawPile.get(0));
@@ -117,5 +118,19 @@ public class GameTest {
 
 		// Then
 		assertTrue(isPlaying);
+	}
+
+	@Test
+	public void takeACardFromTheDrawPile() {
+		// Given
+
+		// When
+		Card card = gameBeingTested.takeCardFromDrawPile ();
+
+		// Then
+		assertEquals (card3, card);
+		assertEquals (2, gameBeingTested.getDrawPile().size());
+		assertEquals (card1, gameBeingTested.getDrawPile().get(0));
+		assertEquals (card2, gameBeingTested.getDrawPile().get(1));
 	}
 }

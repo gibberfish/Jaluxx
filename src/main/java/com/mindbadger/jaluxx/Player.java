@@ -1,10 +1,16 @@
 package com.mindbadger.jaluxx;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import com.mindbadger.jaluxx.card.Card;
+
 public class Player {
 	private String name;
 	private String password;
 	private Game game;
 	private PlayerStatus status;
+	private List<Card> hand = new LinkedList<Card> ();
 	
 	public Player () {
 		status = PlayerStatus.NOT_IN_GAME;
@@ -33,5 +39,11 @@ public class Player {
 	}
 	public void setStatus(PlayerStatus status) {
 		this.status = status;
+	}
+	public List<Card> getHand() {
+		return hand;
+	}
+	public void addCardToHand (Card card){
+		this.hand.add(card);
 	}
 }

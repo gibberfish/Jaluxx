@@ -8,7 +8,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.mindbadger.jaluxx.card.Card;
-import com.mindbadger.jaluxx.gamemanager.GameManager;
 
 public class Game {
 	Logger logger = Logger.getLogger(Game.class);
@@ -16,14 +15,11 @@ public class Game {
 	List<Player> players = new ArrayList<Player> ();
 	private long gameId;
 	private int minimumPlayers = 2;
-	private Pack pack;
 	private List<Card> drawPile = new LinkedList<Card> ();
 
 	public Game(Player player, Pack pack) {
-		//gameId = UUID.randomUUID().toString();
 		gameId = Calendar.getInstance().getTime().getTime();
 		players.add(player);
-		this.pack = pack;
 		
 		for (Card card : pack.getCardsInPack()) {
 			drawPile.add(card);
@@ -60,6 +56,10 @@ public class Game {
 
 	public List<Card> getDrawPile() {
 		return drawPile;
+	}
+
+	public Card takeCardFromDrawPile() {
+		return drawPile.remove(drawPile.size()-1);
 	}
 
 }
