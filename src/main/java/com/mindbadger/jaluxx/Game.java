@@ -16,10 +16,12 @@ public class Game {
 	private long gameId;
 	private int minimumPlayers = 2;
 	private List<Card> drawPile = new LinkedList<Card> ();
+	private Dealer dealer;
 
-	public Game(Player player, Pack pack) {
+	public Game(Player player, Pack pack, Dealer dealer) {
 		gameId = Calendar.getInstance().getTime().getTime();
 		players.add(player);
+		this.dealer = dealer;
 		
 		for (Card card : pack.getCardsInPack()) {
 			drawPile.add(card);
@@ -61,5 +63,4 @@ public class Game {
 	public Card takeCardFromDrawPile() {
 		return drawPile.remove(drawPile.size()-1);
 	}
-
 }

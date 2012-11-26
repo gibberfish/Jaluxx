@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.mindbadger.jaluxx.Action;
 import com.mindbadger.jaluxx.ActionType;
+import com.mindbadger.jaluxx.Dealer;
 import com.mindbadger.jaluxx.JaluxxException;
 import com.mindbadger.jaluxx.Game;
 import com.mindbadger.jaluxx.Pack;
@@ -22,7 +23,7 @@ public class GameManager {
 	private Map<String, Player> registeredPlayers = new HashMap<String, Player> ();
 	private List<Action> actions = new ArrayList<Action> ();
 	private Map<String, Game> games = new HashMap<String, Game> ();
-	
+	private Dealer dealer;
 	private Pack pack = new Pack ();
 	
 	public GameManager () {
@@ -63,7 +64,7 @@ public class GameManager {
 	public void startNewGameForPlayer(Player player) {
 		logger.debug("startNewGameForPlayer: " + player.getName());
 		
-		Game newGame = new Game (player, pack);
+		Game newGame = new Game (player, pack, dealer);
 		games.put(Long.toString(newGame.getGameId()), newGame);
 		player.setGame(newGame);
 		
@@ -97,6 +98,10 @@ public class GameManager {
 	public void setPack(Pack pack) {
 		this.pack = pack;
 		logger.debug("We now have " + pack.getCardsInPack().size() + " cards in the pack");
+	}
+
+	public void setDealer(Dealer dealer) {
+		this.dealer = dealer;
 	}
 
 }
