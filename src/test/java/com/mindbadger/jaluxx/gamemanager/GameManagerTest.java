@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
 import com.mindbadger.jaluxx.Action;
+import com.mindbadger.jaluxx.GameStatus;
 import com.mindbadger.jaluxx.JaluxxException;
 import com.mindbadger.jaluxx.Game;
 import com.mindbadger.jaluxx.Player;
@@ -197,6 +198,8 @@ public class GameManagerTest {
 		assertEquals (PlayerStatus.READY_TO_PLAY, player1.getStatus());
 		assertEquals (PlayerStatus.JOINED_GAME, player2.getStatus());
 		
+		assertEquals (GameStatus.SETUP, game.getStatus());
+		
 		List<Action> actions = gameManagerBeingTested.getActions ();
 		assertEquals (3, actions.size());
 		Action action = actions.get(2);
@@ -220,6 +223,8 @@ public class GameManagerTest {
 		assertEquals (PlayerStatus.READY_TO_PLAY, player1.getStatus());
 		assertEquals (PlayerStatus.READY_TO_PLAY, player2.getStatus());
 		
+		assertEquals (GameStatus.PLAYING, game.getStatus());
+		
 		List<Action> actions = gameManagerBeingTested.getActions ();
 		assertEquals (4, actions.size());
 		Action action = actions.get(3);
@@ -228,4 +233,19 @@ public class GameManagerTest {
 		assertEquals ("Anne is ready to play", action.getActionMessageFor(player1));
 	}
 
+	@Test
+	public void playerCantBeReadyToPlayIfNotInAGame () {
+		// Given
+		gameManagerBeingTested.registerNewPlayer (player1);
+		
+		// When
+		try {
+			gameManagerBeingTested.readyToPlay(player1);
+			fail ("Exception expected because player can't be ready to play if they're not in a game");
+		} catch (JaluxxException e) {
+			// Then
+			assertEquals ("Player can't be ready to play if they're not in a game", e.getMessage());
+		}
+		
+	}
 }

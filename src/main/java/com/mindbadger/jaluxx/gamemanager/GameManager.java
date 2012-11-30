@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.mindbadger.jaluxx.Action;
 import com.mindbadger.jaluxx.ActionType;
 import com.mindbadger.jaluxx.Dealer;
+import com.mindbadger.jaluxx.GameStatus;
 import com.mindbadger.jaluxx.JaluxxException;
 import com.mindbadger.jaluxx.Game;
 import com.mindbadger.jaluxx.Pack;
@@ -48,19 +49,6 @@ public class GameManager {
 		return player;
 	}
 
-	
-	protected void addAction (ActionType type, Player player) {
-		actions.add(new Action (type, player));
-	}
-	
-	public Map<String, Player> getRegisteredPlayers() {
-		return registeredPlayers;
-	}
-
-	public List<Action> getActions() {
-		return actions;
-	}
-
 	public void startNewGameForPlayer(Player player) {
 		logger.debug("startNewGameForPlayer: " + player.getName());
 		
@@ -71,11 +59,6 @@ public class GameManager {
 		player.setStatus(PlayerStatus.JOINED_GAME);
 		
 		addAction (ActionType.NEW_GAME, player);
-	}
-
-	public List<Game> getGames() {
-		
-		return new ArrayList<Game>(games.values());
 	}
 
 	public void joinGame(Player player, String gameId) {
@@ -91,8 +74,26 @@ public class GameManager {
 	}
 
 	public void readyToPlay(Player player) {
+		Game game = player.getGame();
+
+		if (game == null) {
+			throw new JaluxxException("Player can't be ready to play if they're not in a game");
+		}
+		
 		player.setStatus(PlayerStatus.READY_TO_PLAY);
-		addAction (ActionType.READY_TO_PLAY, player);		
+		addAction (ActionType.READY_TO_PLAY, player);	
+		
+		List<Player> players = game.getPlayers();
+		
+		if (players.size() < game.getMinimumPlayers()) return;
+		
+		for (Player playerInGame : players) {
+			if (playerInGame.getStatus() != PlayerStatus.READY_TO_PLAY) {
+				return;
+			}
+		}
+		
+		game.setStatus(GameStatus.PLAYING);
 	}
 
 	public void setPack(Pack pack) {
@@ -104,4 +105,23 @@ public class GameManager {
 		this.dealer = dealer;
 	}
 
+	protected void addAction (ActionType type, Player player) {
+		actions.add(new Action (type, player));
+	}
+	
+	public List<Action> getActions() {
+		return actions;
+	}
+
+	public Map<String, Player> getRegisteredPlayers() {
+		return registeredPlayers;
+	}
+
+	public List<Game> getGames() {
+		
+		return new ArrayList<Game>(games.values());
+	}
 }
+
+
+

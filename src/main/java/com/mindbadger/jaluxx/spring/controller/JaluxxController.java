@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mindbadger.jaluxx.Action;
+import com.mindbadger.jaluxx.GameStatus;
 import com.mindbadger.jaluxx.Player;
 import com.mindbadger.jaluxx.gamemanager.GameManager;
 
@@ -40,7 +41,7 @@ public class JaluxxController {
     mav.addObject("actions", getActionStrings(player));
     mav.addObject("games", gameManager.getGames());
     
-    if (player.getGame() != null && player.getGame().isPlaying()) {
+    if (player.getGame() != null && player.getGame().getStatus() != GameStatus.SETUP) {
    	 mav.setViewName("jaluxx");
     } else {
    	 mav.setViewName("chooseGame");

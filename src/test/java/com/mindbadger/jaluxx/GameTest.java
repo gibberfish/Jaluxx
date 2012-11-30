@@ -72,54 +72,13 @@ public class GameTest {
 	}
 
 	@Test
-	public void gameIsNotPlayingWhenOnePlayerJoinedGame() {
-		// Given
-		player1.setStatus(PlayerStatus.JOINED_GAME);
-
+	public void gameIsNotPlayingOnStartup() {
+		// Given		
+		
 		// When
-		boolean isPlaying = gameBeingTested.isPlaying ();
 
 		// Then
-		assertFalse(isPlaying);
-	}
-
-	@Test
-	public void gameIsNotPlayingWhenOnlyOnePlayerIsReady() {
-		// Given
-		player1.setStatus(PlayerStatus.READY_TO_PLAY);
-
-		// When
-		boolean isPlaying = gameBeingTested.isPlaying ();
-
-		// Then
-		assertFalse(isPlaying);
-	}
-
-	@Test
-	public void gameIsNotPlayingWhenTwoPlayersNotReady() {
-		// Given
-		player1.setStatus(PlayerStatus.JOINED_GAME);
-		gameBeingTested.addPlayer(player2);
-
-		// When
-		boolean isPlaying = gameBeingTested.isPlaying ();
-
-		// Then
-		assertFalse(isPlaying);
-	}
-
-	@Test
-	public void gameIsNotPlayingWhenTwoPlayersReady() {
-		// Given
-		player1.setStatus(PlayerStatus.READY_TO_PLAY);
-		gameBeingTested.addPlayer(player2);
-		player2.setStatus(PlayerStatus.READY_TO_PLAY);
-
-		// When
-		boolean isPlaying = gameBeingTested.isPlaying ();
-
-		// Then
-		assertTrue(isPlaying);
+		assertEquals (GameStatus.SETUP, gameBeingTested.getStatus());
 	}
 
 	@Test
