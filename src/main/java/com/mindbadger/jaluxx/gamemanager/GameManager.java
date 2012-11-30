@@ -24,8 +24,7 @@ public class GameManager {
 	private Map<String, Player> registeredPlayers = new HashMap<String, Player> ();
 	private List<Action> actions = new ArrayList<Action> ();
 	private Map<String, Game> games = new HashMap<String, Game> ();
-	private Dealer dealer;
-	private Pack pack = new Pack ();
+	private GameFactory gameFactory;
 	
 	public GameManager () {
 		logger.debug("GameManager starting up");
@@ -52,7 +51,7 @@ public class GameManager {
 	public void startNewGameForPlayer(Player player) {
 		logger.debug("startNewGameForPlayer: " + player.getName());
 		
-		Game newGame = new Game (player, pack, dealer);
+		Game newGame = gameFactory.createNewGameForPlayer(player);
 		games.put(Long.toString(newGame.getGameId()), newGame);
 		player.setGame(newGame);
 		
@@ -93,16 +92,7 @@ public class GameManager {
 			}
 		}
 		
-		game.setStatus(GameStatus.PLAYING);
-	}
-
-	public void setPack(Pack pack) {
-		this.pack = pack;
-		logger.debug("We now have " + pack.getCardsInPack().size() + " cards in the pack");
-	}
-
-	public void setDealer(Dealer dealer) {
-		this.dealer = dealer;
+		game.startGame();
 	}
 
 	protected void addAction (ActionType type, Player player) {
@@ -120,6 +110,14 @@ public class GameManager {
 	public List<Game> getGames() {
 		
 		return new ArrayList<Game>(games.values());
+	}
+
+	public GameFactory getGameFactory() {
+		return gameFactory;
+	}
+
+	public void setGameFactory(GameFactory gameFactory) {
+		this.gameFactory = gameFactory;
 	}
 }
 

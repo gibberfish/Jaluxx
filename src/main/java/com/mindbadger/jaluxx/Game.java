@@ -30,21 +30,13 @@ public class Game {
 		}
 	}
 
+	public void startGame() {
+		status = GameStatus.PLAYING;
+	}
+
 	public Card takeCardFromDrawPile() {
 		return drawPile.remove(drawPile.size()-1);
 	}
-
-//	public boolean isPlaying() {
-//		if (players.size() < minimumPlayers) return false;
-//		
-//		for (Player playerInGame : players) {
-//			if (playerInGame.getStatus() != PlayerStatus.READY_TO_PLAY) {
-//				return false;
-//			}
-//		}
-//		
-//		return true;
-//	}
 	
 	public List<Player> getPlayers() {
 		return players;
@@ -58,10 +50,6 @@ public class Game {
 		return status;
 	}
 
-	public void setStatus(GameStatus status) {
-		this.status = status;
-	}
-
 	public void addPlayer(Player player) {
 		players.add(player);
 	}
@@ -73,4 +61,5 @@ public class Game {
 	public List<Card> getDrawPile() {
 		return drawPile;
 	}
+
 }

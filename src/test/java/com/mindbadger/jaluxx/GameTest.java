@@ -94,4 +94,15 @@ public class GameTest {
 		assertEquals (card1, gameBeingTested.getDrawPile().get(0));
 		assertEquals (card2, gameBeingTested.getDrawPile().get(1));
 	}
+	
+	@Test
+	public void startGame () {
+		// Given
+		
+		// When
+		gameBeingTested.startGame();
+		
+		// Then
+		assertEquals (GameStatus.PLAYING, gameBeingTested.getStatus());
+	}
 }
