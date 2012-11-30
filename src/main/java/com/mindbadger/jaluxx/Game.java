@@ -10,6 +10,8 @@ import org.apache.log4j.Logger;
 import com.mindbadger.jaluxx.card.Card;
 
 public class Game {
+	private static final int CARDS_TO_DEAL = 3;
+
 	Logger logger = Logger.getLogger(Game.class);
 	
 	List<Player> players = new ArrayList<Player> ();
@@ -32,6 +34,8 @@ public class Game {
 
 	public void startGame() {
 		status = GameStatus.PLAYING;
+		
+		dealer.deal(drawPile, players, CARDS_TO_DEAL);
 	}
 
 	public Card takeCardFromDrawPile() {

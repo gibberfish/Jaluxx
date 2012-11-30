@@ -101,8 +101,10 @@ public class GameTest {
 		
 		// When
 		gameBeingTested.startGame();
+		List<Player> playerList = gameBeingTested.getPlayers();
 		
 		// Then
 		assertEquals (GameStatus.PLAYING, gameBeingTested.getStatus());
+		verify(mockDealer).deal(pack.getCardsInPack(), playerList, 3);
 	}
 }
