@@ -11,7 +11,7 @@ public enum GameStatus {
 		this.statusText = statusText;
 	}
 	
-	public String getStatus () {
+	public String getText () {
 		return statusText;
 	}
 }
