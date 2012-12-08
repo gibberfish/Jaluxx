@@ -16,45 +16,54 @@ import com.mindbadger.jaluxx.GameStatus;
 import com.mindbadger.jaluxx.Player;
 import com.mindbadger.jaluxx.gamemanager.GameManager;
 
-@SessionAttributes({"player"})
+@SessionAttributes({ "player" })
 @Controller
 public class JaluxxController {
-  Logger logger = Logger.getLogger(JaluxxController.class);
-  
-  @Autowired
-  GameManager gameManager;
+	Logger logger = Logger.getLogger(JaluxxController.class);
 
-  @ModelAttribute("player")
-  public Player populatePlayer () {
-	  return new Player();
-  }
-  
-  @RequestMapping("/jaluxx.html")
-  public ModelAndView chooseGame(@ModelAttribute("player") Player player) {
-    logger.debug("CONTROLLER: chooseGame (jaluxx starting point)");
-    logger.debug("...player: " + player.getName());
-    
-    ModelAndView mav = new ModelAndView();
-    mav.addObject("registeredPlayers", gameManager.getRegisteredPlayers());
-    
-    mav.addObject("me", player);
-    mav.addObject("actions", getActionStrings(player));
-    mav.addObject("games", gameManager.getGames());
-    
-    if (player.getGame() != null && player.getGame().getStatus() != GameStatus.SETUP) {
-   	 mav.setViewName("jaluxx");
-    } else {
-   	 mav.setViewName("chooseGame");
-    }
-    
-    return mav;
-  }
+	@Autowired
+	GameManager gameManager;
 
-  private List<String> getActionStrings (Player player) {
-	  List<String> actionStrings = new ArrayList<String> ();
-	  for (Action action : gameManager.getActions()) {
-		  actionStrings.add(action.getActionMessageFor(player));
-	  }
-	  return actionStrings;
-  }
+	@ModelAttribute("player")
+	public Player populatePlayer() {
+		return new Player();
+	}
+
+	@RequestMapping("/jaluxx.html")
+	public ModelAndView chooseGame(@ModelAttribute("player") Player player) {
+		logger.debug("CONTROLLER: chooseGame (jaluxx starting point)");
+		logger.debug("...player: " + player.getName());
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("registeredPlayers", gameManager.getRegisteredPlayers());
+
+		mav.addObject("me", player);
+
+		if (player.getGame() != null && player.getGame().getStatus() != GameStatus.SETUP) {
+		   mav.addObject("actions", getActionStringsFromGame(player));
+			mav.setViewName("jaluxx");
+		} else {
+			mav.addObject("actions", getActionStringsFromGameManager(player));
+			mav.addObject("games", gameManager.getGames());
+			mav.setViewName("chooseGame");
+		}
+
+		return mav;
+	}
+
+	private List<String> getActionStringsFromGameManager(Player player) {
+		List<String> actionStrings = new ArrayList<String>();
+		for (Action action : gameManager.getActions()) {
+			actionStrings.add(action.getActionMessageFor(player));
+		}
+		return actionStrings;
+	}
+
+	private List<String> getActionStringsFromGame(Player player) {
+		List<String> actionStrings = new ArrayList<String>();
+		for (Action action : player.getGame().getActions()) {
+			actionStrings.add(action.getActionMessageFor(player));
+		}
+		return actionStrings;
+	}
 }

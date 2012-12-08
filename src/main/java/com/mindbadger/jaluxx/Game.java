@@ -20,6 +20,8 @@ public class Game {
 	private List<Card> drawPile = new LinkedList<Card> ();
 	private Dealer dealer;
 	private GameStatus status;
+	private int whosTurn;
+	private List<Action> actions = new ArrayList<Action> ();
 
 	public Game(Player player, Pack pack, Dealer dealer) {
 		gameId = Calendar.getInstance().getTime().getTime();
@@ -36,6 +38,9 @@ public class Game {
 		status = GameStatus.PLAYING;
 		
 		dealer.deal(drawPile, players, CARDS_TO_DEAL);
+		 
+		whosTurn = 0;
+		addAction (ActionType.PLAYERS_TURN, players.get(whosTurn));
 	}
 
 	public Card takeCardFromDrawPile() {
@@ -66,4 +71,15 @@ public class Game {
 		return drawPile;
 	}
 
+	public Object getWhosTurn() {
+		return whosTurn;
+	}
+
+	protected void addAction (ActionType type, Player player) {
+		actions.add(new Action (type, player));
+	}
+	
+	public List<Action> getActions() {
+		return actions;
+	}
 }

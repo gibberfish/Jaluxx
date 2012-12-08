@@ -106,5 +106,14 @@ public class GameTest {
 		// Then
 		assertEquals (GameStatus.PLAYING, gameBeingTested.getStatus());
 		verify(mockDealer).deal(pack.getCardsInPack(), playerList, 3);
+		
+		assertEquals (0, gameBeingTested.getWhosTurn());
+		
+		List<Action> actions = gameBeingTested.getActions ();
+		assertEquals (1, actions.size());
+		Action action = actions.get(0);
+		
+		assertEquals ("Your turn", action.getActionMessageFor(player1));
+		assertEquals ("Mark's turn", action.getActionMessageFor(player2));
 	}
 }

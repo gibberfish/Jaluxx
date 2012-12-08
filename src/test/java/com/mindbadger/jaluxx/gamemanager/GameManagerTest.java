@@ -1,7 +1,10 @@
 package com.mindbadger.jaluxx.gamemanager;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +16,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.mindbadger.jaluxx.Action;
-import com.mindbadger.jaluxx.GameStatus;
-import com.mindbadger.jaluxx.JaluxxException;
 import com.mindbadger.jaluxx.Game;
+import com.mindbadger.jaluxx.JaluxxException;
 import com.mindbadger.jaluxx.Player;
 import com.mindbadger.jaluxx.PlayerStatus;
-import com.mindbadger.jaluxx.gamemanager.GameManager;
 
 public class GameManagerTest {
 	private GameManager gameManagerBeingTested;
@@ -215,7 +216,6 @@ public class GameManagerTest {
 		assertEquals (PlayerStatus.JOINED_GAME, player2.getStatus());
 		
 		verify(mockGame1, never()).startGame();
-		//setStatus(GameStatus.READY_TO_PLAY);
 		
 		List<Action> actions = gameManagerBeingTested.getActions ();
 		assertEquals (1, actions.size());
@@ -249,7 +249,6 @@ public class GameManagerTest {
 		assertEquals (PlayerStatus.READY_TO_PLAY, player2.getStatus());
 		
 		verify(mockGame1).startGame ();
-		//.setStatus(GameStatus.PLAYING);
 		
 		List<Action> actions = gameManagerBeingTested.getActions ();
 		assertEquals (1, actions.size());
