@@ -25,12 +25,14 @@ public class Game {
 	private GameStatus status;
 	private int whosTurn;
 	private List<Action> actions = new ArrayList<Action> ();
-   private List<Card> discardPile = new LinkedList<Card> ();;
+   private List<Card> discardPile = new LinkedList<Card> ();
+   private Card basicRulesCard;
 
-	public Game(Player player, Pack pack, Dealer dealer) {
+	public Game(Player player, Pack pack, Dealer dealer, Card basicRulesCard) {
 		gameId = Calendar.getInstance().getTime().getTime();
 		players.add(player);
 		this.dealer = dealer;
+		this.basicRulesCard = basicRulesCard;
 		status = GameStatus.SETUP;
 		
 		for (Card card : pack.getCardsInPack()) {
@@ -89,5 +91,9 @@ public class Game {
 
    public List<Card> getDiscardPile() {
       return discardPile;
+   }
+
+   public Card getBasicRulesCard() {
+      return basicRulesCard;
    }
 }

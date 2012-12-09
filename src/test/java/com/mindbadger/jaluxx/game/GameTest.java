@@ -33,6 +33,8 @@ public class GameTest {
    private Card card1 = new Card("card1", CardType.ACTION, "image1");
    private Card card2 = new Card("card2", CardType.KEEPER, "image2");
    private Card card3 = new Card("card3", CardType.RULE, "image3");
+   
+   private Card basicRulesCard = new Card("basicrules", CardType.RULE, "image4");
 
    @Before
    public void setup() {
@@ -52,7 +54,7 @@ public class GameTest {
       cardsInPack.add(card3);
       pack.setCardsInPack(cardsInPack);
 
-      gameBeingTested = new Game(player1, pack, mockDealer);
+      gameBeingTested = new Game(player1, pack, mockDealer, basicRulesCard);
    }
 
    @Test
@@ -90,6 +92,16 @@ public class GameTest {
 
       // Then
       assertEquals(0, gameBeingTested.getDiscardPile().size());
+   }
+
+   @Test
+   public void basicRulesAreSetOnStartup() {
+      // Given
+
+      // When
+
+      // Then
+      assertEquals(basicRulesCard, gameBeingTested.getBasicRulesCard());
    }
 
    @Test
