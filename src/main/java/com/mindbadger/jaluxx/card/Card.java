@@ -2,24 +2,19 @@ package com.mindbadger.jaluxx.card;
 
 import java.util.List;
 
-import com.mindbadger.jaluxx.instruction.InstructionType;
+import com.mindbadger.jaluxx.instruction.Instruction;
 
 public class Card {
    private String cardName;
    private CardType cardType;
    private String image;
-   private List<InstructionType> instructions;
+   private List<Instruction> instructions;
 
    public Card(String cardName, CardType cardType, String image) {
       this.cardName = cardName;
       this.cardType = cardType;
       this.image = image;
    }
-
-//   public Card(String cardName, CardType cardType, String image, List<InstructionType> instructions) {
-//      this(cardName, cardType, image);
-//      this.instructions = instructions;
-//   }
 
    public String getCardName() {
       return cardName;
@@ -45,11 +40,11 @@ public class Card {
       this.image = image;
    }
 
-   public List<InstructionType> getInstructions() {
+   public List<Instruction> getInstructions() {
       return instructions;
    }
 
-   public void setInstructions(List<InstructionType> instructions) {
+   public void setInstructions(List<Instruction> instructions) {
       this.instructions = instructions;
    }
 }

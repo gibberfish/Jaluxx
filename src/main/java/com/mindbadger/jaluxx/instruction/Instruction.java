@@ -1,13 +1,23 @@
 package com.mindbadger.jaluxx.instruction;
 
-public class Instruction {
-	private InstructionType instructionType;
+public enum Instruction {
+	DRAW ("Draw", 10),
+	PLAY ("Play", 20),
+	;
+	
+	private final String message;
+	private final int sequence;
 
-	public Instruction (InstructionType instructionType) {
-	   this.instructionType = instructionType;
+   private Instruction (String message, int sequence) {
+		this.message = message;
+		this.sequence = sequence;
 	}
 	
-   public InstructionType getInstructionType() {
-      return instructionType;
-   }
+	public String getMessage () {
+		return message;
+	}
+
+	public int getSequence() {
+	   return sequence;
+	}
 }
