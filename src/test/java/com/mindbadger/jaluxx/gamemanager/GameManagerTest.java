@@ -15,11 +15,11 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.mindbadger.jaluxx.Action;
-import com.mindbadger.jaluxx.Game;
 import com.mindbadger.jaluxx.JaluxxException;
 import com.mindbadger.jaluxx.Player;
 import com.mindbadger.jaluxx.PlayerStatus;
+import com.mindbadger.jaluxx.action.Action;
+import com.mindbadger.jaluxx.game.Game;
 
 public class GameManagerTest {
 	private GameManager gameManagerBeingTested;

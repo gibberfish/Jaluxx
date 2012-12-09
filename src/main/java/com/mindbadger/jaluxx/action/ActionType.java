@@ -1,4 +1,4 @@
-package com.mindbadger.jaluxx;
+package com.mindbadger.jaluxx.action;
 
 public enum ActionType {
 	// $aname = name of the actioning player

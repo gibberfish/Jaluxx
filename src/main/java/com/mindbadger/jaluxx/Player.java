@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.mindbadger.jaluxx.card.Card;
+import com.mindbadger.jaluxx.game.Game;
 
 public class Player {
 	private String name;

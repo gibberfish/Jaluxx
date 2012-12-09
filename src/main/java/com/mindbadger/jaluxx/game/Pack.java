@@ -1,4 +1,4 @@
-package com.mindbadger.jaluxx;
+package com.mindbadger.jaluxx.game;
 
 import java.util.LinkedList;
 import java.util.List;

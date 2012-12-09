@@ -1,4 +1,4 @@
-package com.mindbadger.jaluxx;
+package com.mindbadger.jaluxx.game;
 
 public enum GameStatus {
 	SETUP ("Setup"),

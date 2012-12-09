@@ -1,4 +1,4 @@
-package com.mindbadger.jaluxx;
+package com.mindbadger.jaluxx.game;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.mindbadger.jaluxx.Player;
+import com.mindbadger.jaluxx.action.Action;
+import com.mindbadger.jaluxx.action.ActionType;
 import com.mindbadger.jaluxx.card.Card;
 
 public class Game {
@@ -22,6 +25,7 @@ public class Game {
 	private GameStatus status;
 	private int whosTurn;
 	private List<Action> actions = new ArrayList<Action> ();
+   private List<Card> discardPile = new LinkedList<Card> ();;
 
 	public Game(Player player, Pack pack, Dealer dealer) {
 		gameId = Calendar.getInstance().getTime().getTime();
@@ -82,4 +86,8 @@ public class Game {
 	public List<Action> getActions() {
 		return actions;
 	}
+
+   public List<Card> getDiscardPile() {
+      return discardPile;
+   }
 }

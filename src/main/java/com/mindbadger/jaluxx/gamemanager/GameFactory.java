@@ -1,9 +1,9 @@
 package com.mindbadger.jaluxx.gamemanager;
 
-import com.mindbadger.jaluxx.Dealer;
-import com.mindbadger.jaluxx.Game;
-import com.mindbadger.jaluxx.Pack;
 import com.mindbadger.jaluxx.Player;
+import com.mindbadger.jaluxx.game.Dealer;
+import com.mindbadger.jaluxx.game.Game;
+import com.mindbadger.jaluxx.game.Pack;
 
 public class GameFactory {
 	private Dealer dealer;

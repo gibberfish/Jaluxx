@@ -1,4 +1,6 @@
-package com.mindbadger.jaluxx;
+package com.mindbadger.jaluxx.action;
+
+import com.mindbadger.jaluxx.Player;
 
 public class Action {
 	private static final String RECEIVING_PLAYER_NAME_TOKEN = "$rname";

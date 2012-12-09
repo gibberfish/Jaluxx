@@ -1,13 +1,13 @@
-package com.mindbadger.jaluxx;
+package com.mindbadger.jaluxx.action;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
-import com.mindbadger.jaluxx.Action;
-import com.mindbadger.jaluxx.ActionType;
 import com.mindbadger.jaluxx.Player;
+import com.mindbadger.jaluxx.action.Action;
+import com.mindbadger.jaluxx.action.ActionType;
 
 
 public class ActionTest {

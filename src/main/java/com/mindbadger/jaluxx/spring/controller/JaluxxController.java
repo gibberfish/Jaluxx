@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mindbadger.jaluxx.Action;
-import com.mindbadger.jaluxx.GameStatus;
 import com.mindbadger.jaluxx.Player;
+import com.mindbadger.jaluxx.action.Action;
+import com.mindbadger.jaluxx.game.GameStatus;
 import com.mindbadger.jaluxx.gamemanager.GameManager;
 
 @SessionAttributes({ "player" })
