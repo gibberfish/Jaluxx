@@ -1,4 +1,4 @@
-package com.mindbadger.jaluxx;
+package com.mindbadger.jaluxx.player;
 
 public enum PlayerStatus {
 	NOT_IN_GAME ("Not In Game"),

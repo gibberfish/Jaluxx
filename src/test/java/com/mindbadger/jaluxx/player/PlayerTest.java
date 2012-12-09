@@ -1,4 +1,4 @@
-package com.mindbadger.jaluxx;
+package com.mindbadger.jaluxx.player;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,8 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
-import com.mindbadger.jaluxx.Player;
-import com.mindbadger.jaluxx.PlayerStatus;
 import com.mindbadger.jaluxx.card.Card;
 import com.mindbadger.jaluxx.card.CardType;
 

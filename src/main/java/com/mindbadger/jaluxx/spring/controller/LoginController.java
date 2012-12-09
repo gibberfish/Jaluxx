@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.mindbadger.jaluxx.JaluxxException;
-import com.mindbadger.jaluxx.Player;
 import com.mindbadger.jaluxx.gamemanager.GameManager;
+import com.mindbadger.jaluxx.player.Player;
 
 @SessionAttributes({"player"})
 @Controller

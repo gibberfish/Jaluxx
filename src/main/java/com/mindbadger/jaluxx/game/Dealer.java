@@ -2,8 +2,8 @@ package com.mindbadger.jaluxx.game;
 
 import java.util.List;
 
-import com.mindbadger.jaluxx.Player;
 import com.mindbadger.jaluxx.card.Card;
+import com.mindbadger.jaluxx.player.Player;
 
 public class Dealer {
 

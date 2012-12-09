@@ -8,11 +8,11 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.mindbadger.jaluxx.JaluxxException;
-import com.mindbadger.jaluxx.Player;
-import com.mindbadger.jaluxx.PlayerStatus;
 import com.mindbadger.jaluxx.action.Action;
 import com.mindbadger.jaluxx.action.ActionType;
 import com.mindbadger.jaluxx.game.Game;
+import com.mindbadger.jaluxx.player.Player;
+import com.mindbadger.jaluxx.player.PlayerStatus;
 
 
 public class GameManager {

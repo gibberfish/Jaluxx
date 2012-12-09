@@ -7,10 +7,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.mindbadger.jaluxx.Player;
 import com.mindbadger.jaluxx.action.Action;
 import com.mindbadger.jaluxx.action.ActionType;
 import com.mindbadger.jaluxx.card.Card;
+import com.mindbadger.jaluxx.player.Player;
 
 public class Game {
 	private static final int CARDS_TO_DEAL = 3;

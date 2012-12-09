@@ -1,4 +1,4 @@
-package com.mindbadger.jaluxx;
+package com.mindbadger.jaluxx.instruction;
 
 public enum Instruction {
 	TAKE_A_TURN, PICK_UP_CARD, PLAY_CARD, GIVE_CARD, TAKE_CARD, DISCARD_CARD, TRASH_RULE, TAKE_FROM_DISCARD_PILE, FINISH_TURN, EMPTY_TRASH, SHUFFLE; 

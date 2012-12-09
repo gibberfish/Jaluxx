@@ -10,10 +10,10 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.mindbadger.jaluxx.Player;
 import com.mindbadger.jaluxx.card.Card;
 import com.mindbadger.jaluxx.card.CardType;
 import com.mindbadger.jaluxx.game.Dealer;
+import com.mindbadger.jaluxx.player.Player;
 
 public class DealerTest {
 	private Dealer dealerUnderTest;

@@ -5,9 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
-import com.mindbadger.jaluxx.Player;
 import com.mindbadger.jaluxx.action.Action;
 import com.mindbadger.jaluxx.action.ActionType;
+import com.mindbadger.jaluxx.player.Player;
 
 
 public class ActionTest {
