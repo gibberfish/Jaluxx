@@ -11,6 +11,7 @@ import com.mindbadger.jaluxx.action.Action;
 import com.mindbadger.jaluxx.action.ActionType;
 import com.mindbadger.jaluxx.card.Card;
 import com.mindbadger.jaluxx.player.Player;
+import com.mindbadger.jaluxx.rules.RulesEngine;
 
 public class Game {
 	private static final int CARDS_TO_DEAL = 3;
@@ -26,13 +27,14 @@ public class Game {
 	private int whosTurn;
 	private List<Action> actions = new ArrayList<Action> ();
    private List<Card> discardPile = new LinkedList<Card> ();
-   private Card basicRulesCard;
+   private RulesEngine rulesEngine;
+   
 
-	public Game(Player player, Pack pack, Dealer dealer, Card basicRulesCard) {
+	public Game(Player player, Pack pack, Dealer dealer, RulesEngine rulesEngine) {
 		gameId = Calendar.getInstance().getTime().getTime();
 		players.add(player);
 		this.dealer = dealer;
-		this.basicRulesCard = basicRulesCard;
+		this.rulesEngine = rulesEngine;
 		status = GameStatus.SETUP;
 		
 		for (Card card : pack.getCardsInPack()) {
@@ -46,8 +48,13 @@ public class Game {
 		dealer.deal(drawPile, players, CARDS_TO_DEAL);
 		 
 		whosTurn = 0;
-		addAction (ActionType.PLAYERS_TURN, players.get(whosTurn));
+		Player player = players.get(whosTurn);
+		startTurnFor(player);
 	}
+
+   private void startTurnFor(Player player) {
+		addAction (ActionType.PLAYERS_TURN, player);
+   }
 
 	public Card takeCardFromDrawPile() {
 		return drawPile.remove(drawPile.size()-1);
@@ -93,7 +100,7 @@ public class Game {
       return discardPile;
    }
 
-   public Card getBasicRulesCard() {
-      return basicRulesCard;
+   public RulesEngine getRulesEngine() {
+      return rulesEngine;
    }
 }

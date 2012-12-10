@@ -17,13 +17,14 @@ import com.mindbadger.jaluxx.card.Card;
 import com.mindbadger.jaluxx.card.CardType;
 import com.mindbadger.jaluxx.player.Player;
 import com.mindbadger.jaluxx.player.PlayerStatus;
+import com.mindbadger.jaluxx.rules.RulesEngine;
 
 public class GameTest {
 
    private Game gameBeingTested;
 
-   @Mock
-   Dealer mockDealer;
+   @Mock Dealer mockDealer;
+   @Mock RulesEngine mockRulesEngine;
 
    private Player player1;
    private Player player2;
@@ -34,8 +35,6 @@ public class GameTest {
    private Card card2 = new Card("card2", CardType.KEEPER, "image2");
    private Card card3 = new Card("card3", CardType.RULE, "image3");
    
-   private Card basicRulesCard = new Card("basicrules", CardType.RULE, "image4");
-
    @Before
    public void setup() {
       MockitoAnnotations.initMocks(this);
@@ -54,7 +53,8 @@ public class GameTest {
       cardsInPack.add(card3);
       pack.setCardsInPack(cardsInPack);
 
-      gameBeingTested = new Game(player1, pack, mockDealer, basicRulesCard);
+      gameBeingTested = new Game(player1, pack, mockDealer, mockRulesEngine);
+
    }
 
    @Test
@@ -92,16 +92,6 @@ public class GameTest {
 
       // Then
       assertEquals(0, gameBeingTested.getDiscardPile().size());
-   }
-
-   @Test
-   public void basicRulesAreSetOnStartup() {
-      // Given
-
-      // When
-
-      // Then
-      assertEquals(basicRulesCard, gameBeingTested.getBasicRulesCard());
    }
 
    @Test
