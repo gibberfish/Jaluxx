@@ -1,4 +1,4 @@
-package com.mindbadger.jaluxx.rules;
+package com.mindbadger.jaluxx.turn;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -11,10 +11,11 @@ import org.mockito.*;
 
 import com.mindbadger.jaluxx.card.Card;
 import com.mindbadger.jaluxx.card.CardType;
+import com.mindbadger.jaluxx.turn.PlayerTurn;
 
-public class RulesEngineTest {
+public class PlayerTurnTest {
 
-   private RulesEngine rulesEngineUnderTest;
+   private PlayerTurn playerTurnUnderTest;
    
    private List<Card> basicRulesCards;
    
@@ -27,7 +28,7 @@ public class RulesEngineTest {
       
       basicRulesCards = new ArrayList<Card> ();
       
-      rulesEngineUnderTest = new RulesEngine (basicRulesCards);
+      playerTurnUnderTest = new PlayerTurn (basicRulesCards);
    }
    
    @Test

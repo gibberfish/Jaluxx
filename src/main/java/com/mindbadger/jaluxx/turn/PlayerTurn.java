@@ -1,15 +1,15 @@
-package com.mindbadger.jaluxx.rules;
+package com.mindbadger.jaluxx.turn;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mindbadger.jaluxx.card.Card;
 
-public class RulesEngine {
+public class PlayerTurn {
    private List<Card> basicRulesCards;
    private List<Card> rulesCards = new ArrayList<Card> ();
    
-   public RulesEngine (List<Card> basicRules) {
+   public PlayerTurn (List<Card> basicRules) {
       
    }
 }

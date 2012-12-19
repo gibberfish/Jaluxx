@@ -10,27 +10,33 @@ import org.apache.log4j.Logger;
 import com.mindbadger.jaluxx.action.Action;
 import com.mindbadger.jaluxx.action.ActionType;
 import com.mindbadger.jaluxx.card.Card;
+import com.mindbadger.jaluxx.gamemanager.GameFactory;
 import com.mindbadger.jaluxx.player.Player;
+import com.mindbadger.jaluxx.turn.PlayerTurn;
 
 public class Game {
 	private static final int CARDS_TO_DEAL = 3;
 
-	Logger logger = Logger.getLogger(Game.class);
+	private Logger logger = Logger.getLogger(Game.class);
 
-	List<Player> players = new ArrayList<Player>();
 	private long gameId;
-	private int minimumPlayers = 2;
-	private List<Card> drawPile = new LinkedList<Card>();
-	private Dealer dealer;
 	private GameStatus status;
+	private int minimumPlayers = 2;
+	private Dealer dealer;
 	private int whosTurn;
+	private List<Player> players = new ArrayList<Player>();
 	private List<Action> actions = new ArrayList<Action>();
+	private List<Card> drawPile = new LinkedList<Card>();
 	private List<Card> discardPile = new LinkedList<Card>();
-
-	public Game(Player player, Pack pack, Dealer dealer) {
+	private List<Card> activeRules = new LinkedList<Card>();
+	private PlayerTurn currentPlayerTurn;
+	private GameFactory gameFactory;
+	
+	public Game(Player player, Pack pack, Dealer dealer, GameFactory gameFactory) {
 		gameId = Calendar.getInstance().getTime().getTime();
 		players.add(player);
 		this.dealer = dealer;
+		this.gameFactory = gameFactory;
 		status = GameStatus.SETUP;
 
 		for (Card card : pack.getCardsInPack()) {
@@ -46,6 +52,8 @@ public class Game {
 		whosTurn = 0;
 		Player player = players.get(whosTurn);
 		startTurnFor(player);
+		
+		gameFactory.createNewTurnForPlayer(player, players, activeRules);
 	}
 
 	private void startTurnFor(Player player) {

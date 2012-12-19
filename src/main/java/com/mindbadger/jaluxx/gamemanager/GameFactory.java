@@ -7,7 +7,7 @@ import com.mindbadger.jaluxx.game.Dealer;
 import com.mindbadger.jaluxx.game.Game;
 import com.mindbadger.jaluxx.game.Pack;
 import com.mindbadger.jaluxx.player.Player;
-import com.mindbadger.jaluxx.rules.RulesEngine;
+import com.mindbadger.jaluxx.turn.PlayerTurn;
 
 public class GameFactory {
 	private Dealer dealer;
@@ -15,9 +15,13 @@ public class GameFactory {
 	private List<Card> basicRulesCards;
 
 	public Game createNewGameForPlayer(Player player) {
-		return new Game(player, pack, dealer);
+		return new Game(player, pack, dealer, this);
 	}
 
+	public PlayerTurn createNewTurnForPlayer (Player player, List<Player> players, List<Card> rules) {
+		return new PlayerTurn (basicRulesCards);
+	}
+	
 	public Dealer getDealer() {
 		return dealer;
 	}
