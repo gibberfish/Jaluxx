@@ -24,7 +24,6 @@ public class GameTest {
    private Game gameBeingTested;
 
    @Mock Dealer mockDealer;
-   @Mock RulesEngine mockRulesEngine;
 
    private Player player1;
    private Player player2;
@@ -53,7 +52,7 @@ public class GameTest {
       cardsInPack.add(card3);
       pack.setCardsInPack(cardsInPack);
 
-      gameBeingTested = new Game(player1, pack, mockDealer, mockRulesEngine);
+      gameBeingTested = new Game(player1, pack, mockDealer);
 
    }
 
