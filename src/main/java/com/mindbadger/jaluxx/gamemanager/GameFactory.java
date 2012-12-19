@@ -12,12 +12,10 @@ import com.mindbadger.jaluxx.rules.RulesEngine;
 public class GameFactory {
 	private Dealer dealer;
 	private Pack pack;
-   private List<Card> basicRulesCards;
+	private List<Card> basicRulesCards;
 
-   public Game createNewGameForPlayer (Player player) {
-      RulesEngine rulesEngine = new RulesEngine (basicRulesCards);
-      
-		return new Game (player, pack, dealer, rulesEngine);
+	public Game createNewGameForPlayer(Player player) {
+		return new Game(player, pack, dealer);
 	}
 
 	public Dealer getDealer() {
@@ -35,12 +33,12 @@ public class GameFactory {
 	public void setPack(Pack pack) {
 		this.pack = pack;
 	}
-	
+
 	public List<Card> getBasicRulesCards() {
-	   return basicRulesCards;
+		return basicRulesCards;
 	}
-	
+
 	public void setBasicRulesCards(List<Card> basicRulesCards) {
-	   this.basicRulesCards = basicRulesCards;
+		this.basicRulesCards = basicRulesCards;
 	}
 }
