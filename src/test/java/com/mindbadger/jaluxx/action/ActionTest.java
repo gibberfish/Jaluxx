@@ -7,6 +7,8 @@ import org.mockito.MockitoAnnotations;
 
 import com.mindbadger.jaluxx.action.Action;
 import com.mindbadger.jaluxx.action.ActionType;
+import com.mindbadger.jaluxx.card.Card;
+import com.mindbadger.jaluxx.card.CardType;
 import com.mindbadger.jaluxx.player.Player;
 
 
@@ -77,4 +79,41 @@ public class ActionTest {
 		assertEquals ("Anne has logged in", message);
 	}
 
+	@Test
+	public void displayMessageForAnActionWithACardVisibleToOnlyActioningPlayer () {
+		// Given
+		Card card = new Card ("War", CardType.KEEPER, "image");
+		actionToTest = new Action (ActionType.DRAW, player1, card);
+		
+		// When
+		String message = actionToTest.getActionMessageFor(player1);
+		
+		// Then
+		assertEquals ("You drew card War", message);
+		
+		// When
+		String message2 = actionToTest.getActionMessageFor(player2);
+		
+		// Then
+		assertEquals ("Mark drew a card", message2);
+	}
+
+	@Test
+	public void displayMessageForAnActionWithACardVisibleToBothPlayers () {
+		// Given
+		Card card = new Card ("War", CardType.KEEPER, "image");
+		actionToTest = new Action (ActionType.PLAY, player1, card);
+		
+		// When
+		String message = actionToTest.getActionMessageFor(player1);
+		
+		// Then
+		assertEquals ("You played card War", message);
+		
+		// When
+		String message2 = actionToTest.getActionMessageFor(player2);
+		
+		// Then
+		assertEquals ("Mark played card War", message2);
+	}
 }

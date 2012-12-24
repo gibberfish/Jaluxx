@@ -1,5 +1,6 @@
 package com.mindbadger.jaluxx.action;
 
+import com.mindbadger.jaluxx.card.Card;
 import com.mindbadger.jaluxx.player.Player;
 
 public class Action {
@@ -7,10 +8,12 @@ public class Action {
 	private static final String ACTIONING_PLAYER_NAME_TOKEN = "$aname";
 	private static final String RECEIVING_PLAYER_TAG = "r";
 	private static final String ACTIONING_PLAYER_TAG = "a";
+	private static final String CARD_TOKEN = "$card";
 	
 	private ActionType actionType;
 	private Player actioningPlayer;
 	private Player receivingPlayer;
+	private Card card;
 	
 	public Action (ActionType actionType, Player actioningPlayer) {
 		this.actionType = actionType;
@@ -22,6 +25,11 @@ public class Action {
 		this.actionType = actionType;
 		this.actioningPlayer = actioningPlayer;
 		this.receivingPlayer = receivingPlayer;
+	}
+
+	public Action(ActionType draw, Player player1, Card card) {
+		this(draw, player1);
+		this.card = card;
 	}
 
 	public ActionType getActionType() {
@@ -44,7 +52,11 @@ public class Action {
 		if (receivingPlayer != null) {
 			message = message.replace(RECEIVING_PLAYER_NAME_TOKEN, receivingPlayer.getName());
 		}
-		
+
+		if (card != null) {
+			message = message.replace(CARD_TOKEN, card.getCardName());
+		}
+
 		return message;
 	}
 
