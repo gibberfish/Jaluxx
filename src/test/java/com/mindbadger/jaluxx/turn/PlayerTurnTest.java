@@ -18,55 +18,116 @@ import com.mindbadger.jaluxx.turn.PlayerTurn;
 
 public class PlayerTurnTest {
 
-   private PlayerTurn playerTurnUnderTest;
-   
-   private List<Card> basicRulesCards;
-   private List<Card> currentRulesCards;
-   private List<Instruction> instructions;
-   private List<Player> players;
-   
-   private Card card1 = new Card ("card1", CardType.ACTION, "image1");
-   private Card card2 = new Card ("card2", CardType.ACTION, "image2");
-   
-   private Player player1 = new Player ();;
-   private Player player2 = new Player ();;
-   
-   @Mock private Game mockGame;
+	private PlayerTurn playerTurnUnderTest;
 
-   
-   @Before
-   public void setup () {
-      MockitoAnnotations.initMocks(this);
-      
-      basicRulesCards = new ArrayList<Card> ();
-      currentRulesCards = new ArrayList<Card> ();
-      players = new ArrayList<Player> ();
-      instructions = new ArrayList<Instruction> ();
-      
-      players.add(player1);
-      players.add(player2);
-      
-   }
-   
-   @Test
-   public void singleBasicRulesCardWithOneInstruction () {
-      // Given
-	   basicRulesCards.add (card1);
-	   card1.setInstructions(instructions);
-	   instructions.add(Instruction.DRAW);
-      
-	   playerTurnUnderTest = new PlayerTurn (basicRulesCards, player1, players, currentRulesCards, mockGame);
+	private List<Card> basicRulesCards;
+	private List<Card> currentRulesCards;
+	private List<Player> players;
 
-	   // When
-      Instruction instruction = playerTurnUnderTest.getNextInstructionForPlayer (player1);
-      
-      // Then
-      assertEquals (Instruction.DRAW, instruction);
+	private Player player1 = new Player();;
+	private Player player2 = new Player();;
 
-      // When
-      Instruction instruction2 = playerTurnUnderTest.getNextInstructionForPlayer (player2);
-      
-      // Then
-      assertNull (instruction2);
-   }
+	@Mock
+	private Game mockGame;
+
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+
+		basicRulesCards = new ArrayList<Card>();
+		currentRulesCards = new ArrayList<Card>();
+		players = new ArrayList<Player>();
+
+		players.add(player1);
+		players.add(player2);
+	}
+
+	@Test
+	public void singleBasicRulesCardWithOneInstruction() {
+		// Given
+		basicRulesCards.add(getCardDrawOne());
+
+		playerTurnUnderTest = new PlayerTurn(basicRulesCards, player1, players, currentRulesCards, mockGame);
+
+		// When
+		Instruction instruction = playerTurnUnderTest.getNextInstructionForPlayer(player1);
+
+		// Then
+		assertEquals(Instruction.DRAW, instruction);
+
+		// When
+		Instruction instruction2 = playerTurnUnderTest.getNextInstructionForPlayer(player2);
+
+		// Then
+		assertNull(instruction2);
+	}
+
+	@Test
+	public void standardBasicRulesCardsAddedBackwards() {
+		// Given
+		basicRulesCards.add(getCardPlayOne());
+		basicRulesCards.add(getCardDrawOne());
+
+		playerTurnUnderTest = new PlayerTurn(basicRulesCards, player1, players, currentRulesCards, mockGame);
+
+		// When
+		Instruction instruction = playerTurnUnderTest.getNextInstructionForPlayer(player1);
+
+		// Then
+		assertEquals(Instruction.DRAW, instruction);
+
+		// When
+		Instruction instruction2 = playerTurnUnderTest.getNextInstructionForPlayer(player2);
+
+		// Then
+		assertNull(instruction2);
+	}
+
+	@Test
+	public void standardBasicRulesCardsAddedForwards() {
+		// Given
+		basicRulesCards.add(getCardDrawOne());
+		basicRulesCards.add(getCardPlayOne());
+
+		playerTurnUnderTest = new PlayerTurn(basicRulesCards, player1, players, currentRulesCards, mockGame);
+
+		// When
+		Instruction instruction = playerTurnUnderTest.getNextInstructionForPlayer(player1);
+
+		// Then
+		assertEquals(Instruction.DRAW, instruction);
+
+		// When
+		Instruction instruction2 = playerTurnUnderTest.getNextInstructionForPlayer(player2);
+
+		// Then
+		assertNull(instruction2);
+	}
+
+	private Card getCardDrawOne() {
+		List<Instruction> instructions = new ArrayList<Instruction>();
+		instructions.add(Instruction.DRAW);
+		
+		Card card = new Card("Draw 1", CardType.RULE, "image1");
+		
+		card.setInstructions(instructions);
+		card.setGroupName("DRAW");
+		card.setSequence(10);
+		
+		return card;
+	}
+	
+	private Card getCardPlayOne() {
+		List<Instruction> instructions = new ArrayList<Instruction>();
+		instructions.add(Instruction.PLAY);
+		
+		Card card = new Card("Play 1", CardType.RULE, "image1");
+		
+		card.setInstructions(instructions);
+		card.setGroupName("PLAY");
+		card.setSequence(70);
+		
+		return card;
+	}
+
 }

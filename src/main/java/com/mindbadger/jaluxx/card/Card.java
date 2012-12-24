@@ -4,69 +4,74 @@ import java.util.List;
 
 import com.mindbadger.jaluxx.instruction.Instruction;
 
-public class Card {
-   private static final int DEFAULT_SEQUENCE = 50;
-   
-   private String cardName;
-   private CardType cardType;
-   private String image;
-   private List<Instruction> instructions;
-   private String groupName;
-   private int sequence;
+public class Card implements Comparable<Card> {
+	private static final int DEFAULT_SEQUENCE = 50;
 
-   public Card(String cardName, CardType cardType, String image) {
-      this.cardName = cardName;
-      this.cardType = cardType;
-      this.image = image;
-      
-      sequence = DEFAULT_SEQUENCE;
-   }
+	private String cardName;
+	private CardType cardType;
+	private String image;
+	private List<Instruction> instructions;
+	private String groupName;
+	private int sequence;
 
-   public String getCardName() {
-      return cardName;
-   }
+	public Card(String cardName, CardType cardType, String image) {
+		this.cardName = cardName;
+		this.cardType = cardType;
+		this.image = image;
 
-   public void setCardName(String cardName) {
-      this.cardName = cardName;
-   }
+		sequence = DEFAULT_SEQUENCE;
+	}
 
-   public CardType getCardType() {
-      return cardType;
-   }
+	public String getCardName() {
+		return cardName;
+	}
 
-   public void setCardType(CardType cardType) {
-      this.cardType = cardType;
-   }
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
 
-   public String getImage() {
-      return image;
-   }
+	public CardType getCardType() {
+		return cardType;
+	}
 
-   public void setImage(String image) {
-      this.image = image;
-   }
+	public void setCardType(CardType cardType) {
+		this.cardType = cardType;
+	}
 
-   public List<Instruction> getInstructions() {
-      return instructions;
-   }
+	public String getImage() {
+		return image;
+	}
 
-   public void setInstructions(List<Instruction> instructions) {
-      this.instructions = instructions;
-   }
+	public void setImage(String image) {
+		this.image = image;
+	}
 
-   public String getGroupName() {
-      return groupName;
-   }
+	public List<Instruction> getInstructions() {
+		return instructions;
+	}
 
-   public void setGroupName(String groupName) {
-      this.groupName = groupName;
-   }
+	public void setInstructions(List<Instruction> instructions) {
+		this.instructions = instructions;
+	}
 
-   public int getSequence() {
-      return sequence;
-   }
+	public String getGroupName() {
+		return groupName;
+	}
 
-   public void setSequence(int sequence) {
-      this.sequence = sequence;
-   }
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public int getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(int sequence) {
+		this.sequence = sequence;
+	}
+
+	@Override
+	public int compareTo(Card card) {
+		return getSequence() - card.getSequence();
+	}
 }
