@@ -108,7 +108,7 @@ public class GameTest {
 
 		// Then
 		verify(mockGameFactory, never()).createNewTurnForPlayer(
-				any(Player.class), any(List.class), any(List.class));
+				any(Player.class), any(List.class), any(List.class), any(Game.class));
 	}
 
 	@Test
@@ -131,14 +131,14 @@ public class GameTest {
 		List<Card> rules = new ArrayList<Card>();
 		when(
 				mockGameFactory.createNewTurnForPlayer(player1,
-						gameBeingTested.getPlayers(), rules)).thenReturn(
+						gameBeingTested.getPlayers(), rules, gameBeingTested)).thenReturn(
 				mockPlayerTurn);
 
 		// When
 		gameBeingTested.startGame();
-		List<Player> playerList = gameBeingTested.getPlayers();
 
 		// Then
+		List<Player> playerList = gameBeingTested.getPlayers();
 		assertEquals(GameStatus.PLAYING, gameBeingTested.getStatus());
 		verify(mockDealer).deal(pack.getCardsInPack(), playerList, 3);
 
@@ -151,7 +151,6 @@ public class GameTest {
 		assertEquals("Your turn", action.getActionMessageFor(player1));
 		assertEquals("Mark's turn", action.getActionMessageFor(player2));
 
-		verify(mockGameFactory).createNewTurnForPlayer(player1,
-				gameBeingTested.getPlayers(), rules);
+		verify(mockGameFactory).createNewTurnForPlayer(player1,	gameBeingTested.getPlayers(), rules, gameBeingTested);
 	}
 }

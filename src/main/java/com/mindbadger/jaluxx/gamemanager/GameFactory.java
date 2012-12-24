@@ -18,8 +18,8 @@ public class GameFactory {
 		return new Game(player, pack, dealer, this);
 	}
 
-	public PlayerTurn createNewTurnForPlayer (Player player, List<Player> players, List<Card> rules) {
-		return new PlayerTurn (basicRulesCards);
+	public PlayerTurn createNewTurnForPlayer (Player player, List<Player> players, List<Card> rules, Game game) {
+		return new PlayerTurn (basicRulesCards, player, players, rules, game);
 	}
 	
 	public Dealer getDealer() {

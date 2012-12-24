@@ -53,7 +53,7 @@ public class Game {
 		Player player = players.get(whosTurn);
 		startTurnFor(player);
 		
-		gameFactory.createNewTurnForPlayer(player, players, activeRules);
+		currentPlayerTurn = gameFactory.createNewTurnForPlayer(player, players, activeRules, this);
 	}
 
 	private void startTurnFor(Player player) {
