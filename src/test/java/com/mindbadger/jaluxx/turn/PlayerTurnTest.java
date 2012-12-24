@@ -104,6 +104,29 @@ public class PlayerTurnTest {
 		assertNull(instruction2);
 	}
 
+//	@Test
+//	public void getNextInstructionAfterAnAction() {
+//		// Given
+//		basicRulesCards.add(getCardDrawOne());
+//		basicRulesCards.add(getCardPlayOne());
+//
+//		playerTurnUnderTest = new PlayerTurn(basicRulesCards, player1, players, currentRulesCards, mockGame);
+//
+//		// When
+//		playerTurnUnderTest.actionPerformedByPlayer ()
+//		
+//		Instruction instruction = playerTurnUnderTest.getNextInstructionForPlayer(player1);
+//
+//		// Then
+//		assertEquals(Instruction.DRAW, instruction);
+//
+//		// When
+//		Instruction instruction2 = playerTurnUnderTest.getNextInstructionForPlayer(player2);
+//
+//		// Then
+//		assertNull(instruction2);
+//	}
+
 	private Card getCardDrawOne() {
 		List<Instruction> instructions = new ArrayList<Instruction>();
 		instructions.add(Instruction.DRAW);
