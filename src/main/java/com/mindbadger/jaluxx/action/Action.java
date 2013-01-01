@@ -1,6 +1,7 @@
 package com.mindbadger.jaluxx.action;
 
 import com.mindbadger.jaluxx.card.Card;
+import com.mindbadger.jaluxx.instruction.Instruction;
 import com.mindbadger.jaluxx.player.Player;
 
 public class Action {
@@ -14,8 +15,9 @@ public class Action {
 	private Player actioningPlayer;
 	private Player receivingPlayer;
 	private Card card;
+	private Instruction instruction;
 	
-	public Action (ActionType actionType, Player actioningPlayer) {
+   public Action (ActionType actionType, Player actioningPlayer) {
 		this.actionType = actionType;
 		this.actioningPlayer = actioningPlayer;
 		this.receivingPlayer = null;
@@ -27,11 +29,22 @@ public class Action {
 		this.receivingPlayer = receivingPlayer;
 	}
 
-	public Action(ActionType draw, Player player1, Card card) {
-		this(draw, player1);
+	public Action(Instruction instruction, ActionType actionType, Player player, Card card) {
+		this(actionType, player);
 		this.card = card;
+		this.instruction = instruction;
 	}
 
+	public Instruction getInstruction() {
+	   return instruction;
+	}
+	
+	public Card getCard() {
+	   return card;
+	}
+	public void setCard(Card card) {
+	   this.card = card;
+	}
 	public ActionType getActionType() {
 		return actionType;
 	}
@@ -41,6 +54,7 @@ public class Action {
 	public Player getReceivingPlayer() {
 		return receivingPlayer;
 	}
+	
 	public String getActionMessageFor(Player player) {
 		String message = actionType.getMessage();
 		

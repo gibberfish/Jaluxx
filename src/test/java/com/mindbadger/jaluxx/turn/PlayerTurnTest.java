@@ -9,6 +9,9 @@ import java.util.List;
 import org.junit.*;
 import org.mockito.*;
 
+import com.mindbadger.jaluxx.JaluxxException;
+import com.mindbadger.jaluxx.action.Action;
+import com.mindbadger.jaluxx.action.ActionType;
 import com.mindbadger.jaluxx.card.Card;
 import com.mindbadger.jaluxx.card.CardType;
 import com.mindbadger.jaluxx.game.Game;
@@ -104,28 +107,50 @@ public class PlayerTurnTest {
 		assertNull(instruction2);
 	}
 
-//	@Test
-//	public void getNextInstructionAfterAnAction() {
-//		// Given
-//		basicRulesCards.add(getCardDrawOne());
-//		basicRulesCards.add(getCardPlayOne());
-//
-//		playerTurnUnderTest = new PlayerTurn(basicRulesCards, player1, players, currentRulesCards, mockGame);
-//
-//		// When
-//		playerTurnUnderTest.actionPerformedByPlayer ()
-//		
-//		Instruction instruction = playerTurnUnderTest.getNextInstructionForPlayer(player1);
-//
-//		// Then
-//		assertEquals(Instruction.DRAW, instruction);
-//
-//		// When
-//		Instruction instruction2 = playerTurnUnderTest.getNextInstructionForPlayer(player2);
-//
-//		// Then
-//		assertNull(instruction2);
-//	}
+  @Test
+   public void exceptionIsThrownIfActionDoesNotMatchCurrentInstruction() {
+      // Given
+      basicRulesCards.add(getCardDrawOne());
+
+      playerTurnUnderTest = new PlayerTurn(basicRulesCards, player1, players, currentRulesCards, mockGame);
+      
+      Card card = new Card ("War", CardType.KEEPER, "image");
+      Action action = new Action (Instruction.PLAY, ActionType.PLAY, player1, card);
+
+      // When
+      try {
+         playerTurnUnderTest.actionPerformedByPlayer (player1, action);
+         fail("An exception should be thrown if the action doesn't match the instruction");
+      } catch (JaluxxException e) {
+         // Then
+         assertEquals ("Action PLAY is not allowed for Instruction DRAW", e.getMessage());
+      }
+   }
+	
+	@Test
+	public void getNextInstructionAfterAnAction() {
+		// Given
+		basicRulesCards.add(getCardDrawOne());
+		basicRulesCards.add(getCardPlayOne());
+
+		playerTurnUnderTest = new PlayerTurn(basicRulesCards, player1, players, currentRulesCards, mockGame);
+		
+		Card card = new Card ("War", CardType.KEEPER, "image");
+		Action action = new Action (Instruction.DRAW, ActionType.DRAW, player1, card);
+
+		// When
+		Instruction instruction = playerTurnUnderTest.getNextInstructionForPlayer(player1);
+
+		// Then
+		assertEquals(Instruction.DRAW, instruction);
+
+		// When
+		playerTurnUnderTest.actionPerformedByPlayer (player1, action);
+		Instruction instruction2 = playerTurnUnderTest.getNextInstructionForPlayer(player1);
+
+		// Then
+		assertEquals(Instruction.PLAY, instruction2);
+	}
 
 	private Card getCardDrawOne() {
 		List<Instruction> instructions = new ArrayList<Instruction>();

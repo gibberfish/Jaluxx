@@ -9,6 +9,7 @@ import com.mindbadger.jaluxx.action.Action;
 import com.mindbadger.jaluxx.action.ActionType;
 import com.mindbadger.jaluxx.card.Card;
 import com.mindbadger.jaluxx.card.CardType;
+import com.mindbadger.jaluxx.instruction.Instruction;
 import com.mindbadger.jaluxx.player.Player;
 
 
@@ -83,7 +84,7 @@ public class ActionTest {
 	public void displayMessageForAnActionWithACardVisibleToOnlyActioningPlayer () {
 		// Given
 		Card card = new Card ("War", CardType.KEEPER, "image");
-		actionToTest = new Action (ActionType.DRAW, player1, card);
+		actionToTest = new Action (Instruction.DRAW, ActionType.DRAW, player1, card);
 		
 		// When
 		String message = actionToTest.getActionMessageFor(player1);
@@ -102,7 +103,7 @@ public class ActionTest {
 	public void displayMessageForAnActionWithACardVisibleToBothPlayers () {
 		// Given
 		Card card = new Card ("War", CardType.KEEPER, "image");
-		actionToTest = new Action (ActionType.PLAY, player1, card);
+		actionToTest = new Action (Instruction.PLAY, ActionType.PLAY, player1, card);
 		
 		// When
 		String message = actionToTest.getActionMessageFor(player1);

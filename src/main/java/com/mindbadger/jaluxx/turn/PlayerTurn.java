@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mindbadger.jaluxx.JaluxxException;
+import com.mindbadger.jaluxx.action.Action;
 import com.mindbadger.jaluxx.card.Card;
 import com.mindbadger.jaluxx.game.Game;
 import com.mindbadger.jaluxx.instruction.Instruction;
@@ -43,4 +45,14 @@ public class PlayerTurn {
 		List<Instruction> instructions = playerInstructions.get(player);
 		return (instructions.size()>0 ? instructions.get(0) : null);
 	}
+
+   public void actionPerformedByPlayer(Player player, Action action) {
+      Instruction nextInstructionForPlayer = getNextInstructionForPlayer(player);
+      if (nextInstructionForPlayer != action.getInstruction()) {
+         throw new JaluxxException ("Action " + action.getActionType() + " is not allowed for Instruction " + nextInstructionForPlayer);
+      }
+      
+      List<Instruction> instructions = playerInstructions.get(player);
+      instructions.remove(0);
+   }
 }
